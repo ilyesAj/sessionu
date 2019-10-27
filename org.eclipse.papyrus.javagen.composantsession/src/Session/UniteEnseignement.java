@@ -48,13 +48,13 @@ public class UniteEnseignement {
 
 	/**
 	 * 
-	 * @param id 
-	 * @param code 
-	 * @param intitule 
-	 * @param cours 
-	 * @param td 
-	 * @param tp 
-	 * @param valeur 
+	 * @param id
+	 * @param code
+	 * @param intitule
+	 * @param cours
+	 * @param td
+	 * @param tp
+	 * @param valeur
 	 */
 	public UniteEnseignement(String id, String code, String intitule, float cours, float td, float tp, float valeur) {
 		this.id = id;

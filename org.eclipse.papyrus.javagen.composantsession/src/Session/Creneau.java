@@ -54,8 +54,8 @@ public class Creneau extends SqlUtils {
 
 	public void save() {
 		this.connect();
-		this.requestUpdate(String.format("INSERT INTO CRENEAU WHERE ID='?')", this.id, this.debut.toString(),
-				this.fin.toString(), this.jour.toString(), this.classe));
+		this.requestUpdate(String.format("INSERT INTO CRENEAU VALUES('?','?','?','?','?')", this.id,
+				this.debut.toString(), this.fin.toString(), this.jour.toString(), this.classe));
 		this.disconnect();
 	}
 
@@ -88,19 +88,19 @@ public class Creneau extends SqlUtils {
 			return null;
 		}
 	}
-	
+
 	public static List<Creneau> getAll() {
 		SqlUtils sql = new SqlUtils();
 		sql.connect();
 		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CRENEAU"));
 		sql.disconnect();
-		List<Creneau>result=new ArrayList<Creneau>();
-		
+		List<Creneau> result = new ArrayList<Creneau>();
+
 		try {
 			while (set.next()) {
-			Creneau creneau = new Creneau(set.getString("id"), LocalTime.parse(set.getString("debut")),
-					LocalTime.parse(set.getString("fin")), LocalDate.parse(set.getString("jour")));
-			result.add(creneau);		
+				Creneau creneau = new Creneau(set.getString("id"), LocalTime.parse(set.getString("debut")),
+						LocalTime.parse(set.getString("fin")), LocalDate.parse(set.getString("jour")));
+				result.add(creneau);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
