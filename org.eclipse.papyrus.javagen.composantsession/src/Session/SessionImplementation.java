@@ -60,7 +60,26 @@ public class SessionImplementation implements SessionInterface {
 	@Override
 	public String createSession(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UE = null ;
+		String classe = null;
+		String creneau = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			UE = obj.getString("UE");
+			classe = obj.getString("classe");
+			creneau = obj.getString("creneau");
+			
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: UE,classe,creneau");
+			
+		}
+		String id = UUID.randomUUID().toString();
+
+		String ret = "{ \"id\": \""+id+"\"";
+		
+		return ret;
 	}
 
 	@Override
