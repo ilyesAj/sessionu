@@ -50,7 +50,7 @@ public class UniteEnseignement {
 	 * 
 	 * @param id 
 	 * @param code 
-	 * @param intitul� 
+	 * @param intitule 
 	 * @param cours 
 	 * @param td 
 	 * @param tp 

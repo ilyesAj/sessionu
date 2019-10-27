@@ -28,7 +28,7 @@ public class Personne {
 	/**
 	 * 
 	 */
-	private String status;
+	private enum status {Eleve,Enseignant};
 
 	/**
 	 * 

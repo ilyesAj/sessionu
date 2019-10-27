@@ -4,6 +4,9 @@
 
 package Session;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /************************************************************/
 /**
  * 
@@ -16,15 +19,15 @@ public class Creneau {
 	/**
 	 * 
 	 */
-	private String debut;
+	private LocalTime debut;
 	/**
 	 * 
 	 */
-	private String fin;
+	private LocalTime fin;
 	/**
 	 * 
 	 */
-	private String jour;
+	private LocalDate jour;
 	/**
 	 * 
 	 */
