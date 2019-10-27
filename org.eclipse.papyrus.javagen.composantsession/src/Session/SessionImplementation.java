@@ -4,6 +4,8 @@
 
 package Session;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -100,7 +102,9 @@ public class SessionImplementation implements SessionInterface {
 		String id = UUID.randomUUID().toString();
 		UniteEnseignement UE = new UniteEnseignement(id, code, intitule, cours, td, tp, valeur);
 
-		String ret = "{ \"id\": \"" + id + "\"";
+
+		String ret = "{ \"id\": \""+id+"\" }";
+		
 
 		return ret;
 	}
@@ -108,19 +112,75 @@ public class SessionImplementation implements SessionInterface {
 	@Override
 	public String createCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		//init
+		String id =UUID.randomUUID().toString();
+		LocalTime debut =LocalTime.of(0, 0, 0);
+		LocalTime fin=LocalTime.of(0, 0, 0);;
+		LocalDate jour=LocalDate.of(0, 0, 0);
+		//parse
+		JSONObject obj = new JSONObject(JSONEntry);
+		debut =LocalTime.parse(obj.getString("debut"));
+		fin=LocalTime.parse(obj.getString("fin"));
+		jour=LocalDate.parse(obj.getString("jour"));
+		//create json
+		Creneau C = new Creneau(id, debut, fin, jour);
+		String ret = "{ \"id\": \""+id+"\"}";
+		return ret;
 	}
 
 	@Override
 	public String createClasse(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+	
+		int promotion = 0;
+		String filiere = null; 
+		
+		JSONObject obj = new JSONObject(JSONEntry);
+		
+		try {
+			promotion = Integer.parseInt(obj.getString("promotion"));
+			filiere = obj.getString("filiere");
+		}catch(JSONException e) {
+			
+			System.out.println("Unexpected json file, should be: promotion,filiere");
+			
+		}
+		String id = UUID.randomUUID().toString();
+		Classe classe= new Classe(id,promotion,filiere);
+
+		String ret = "{ \"id\": \""+id+"\"}";
+			
+		return ret;	
+
+		
+		
+		
+		
 	}
 
 	@Override
 	public String createSession(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UE = null ;
+		String classe = null;
+		String creneau = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			UE = obj.getString("UE");
+			classe = obj.getString("classe");
+			creneau = obj.getString("creneau");
+			
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: UE,classe,creneau");
+			
+		}
+		String id = UUID.randomUUID().toString();
+
+		String ret = "{ \"id\": \""+id+"\"}";
+		
+		return ret;
 	}
 
 	@Override
@@ -138,25 +198,69 @@ public class SessionImplementation implements SessionInterface {
 	@Override
 	public String deleteEU(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UUID = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			UUID = obj.getString("UUID");
+		
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: UUID");
+			
+		}
+		return "{ \"result\": \"done\"}";
 	}
 
 	@Override
 	public String deleteCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UUID = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			UUID = obj.getString("UUID");
+		
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: UUID");
+			
+		}
+		return "{ \"result\": \"done\"}";
 	}
 
 	@Override
 	public String deleteSession(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UUID = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			UUID = obj.getString("UUID");
+		
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: UUID");
+			
+		}
+		return "{ \"result\": \"done\"}";
 	}
 
 	@Override
 	public String deleteClasse(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UUID = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			UUID = obj.getString("UUID");
+		
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: UUID");
+			
+		}
+		return "{ \"result\": \"done\"}";
 	}
 
 };
