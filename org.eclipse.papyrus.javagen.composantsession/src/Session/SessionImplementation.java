@@ -159,8 +159,4 @@ public class SessionImplementation implements SessionInterface {
 		return null;
 	}
 
-	public static void main(String[] args) {
-		SessionImplementation s = new SessionImplementation();
-		s.initDatabase();
-	}
 };

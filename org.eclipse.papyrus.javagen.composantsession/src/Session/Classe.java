@@ -54,7 +54,7 @@ public class Classe extends SqlUtils {
 
 	public void update() {
 		this.connect();
-		this.requestUpdate(String.format("UPDATE CLASSE SET id='?',promotion=?,filiere='?' WHERE id='?'",
+		this.requestUpdate(String.format("UPDATE CLASSE SET promotion=?,filiere='?' WHERE id='?'",
 				String.valueOf(this.promotion), this.filiere, this.id));
 		this.disconnect();
 	}
