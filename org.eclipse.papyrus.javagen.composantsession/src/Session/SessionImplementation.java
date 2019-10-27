@@ -61,7 +61,7 @@ public class SessionImplementation implements SessionInterface {
 		try (Statement stmt = conn.createStatement()) {
 			// create a new table
 			stmt.execute(sql);
-			System.out.println("patient created");
+			System.out.println("CRENEAU table created");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
