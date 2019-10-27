@@ -4,15 +4,21 @@
 
 package Session;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /************************************************************/
 /**
  * 
  */
-public class Classe {
+public class Classe extends SqlUtils {
 	/**
 	 * 
 	 */
-	//test commit
+	// test commit
+
 	private String id;
 	/**
 	 * 
@@ -29,13 +35,69 @@ public class Classe {
 
 	/**
 	 * 
-	 * @param id 
-	 * @param promotion 
-	 * @param filiere 
+	 * @param id
+	 * @param promotion
+	 * @param filiere
 	 */
 	public Classe(String id, int promotion, String filiere) {
 		this.id = id;
 		this.promotion = promotion;
 		this.filiere = filiere;
+	}
+
+	public void save() {
+		this.connect();
+		this.requestUpdate(String.format("INSERT INTO CLASSE VALUES('?',?,'?')", this.id,
+				String.valueOf(this.promotion), this.filiere));
+		this.disconnect();
+	}
+
+	public void update() {
+		this.connect();
+		this.requestUpdate(String.format("UPDATE CLASSE SET promotion=?,filiere='?' WHERE id='?'",
+				String.valueOf(this.promotion), this.filiere, this.id));
+		this.disconnect();
+	}
+
+	public void delete() {
+		this.connect();
+		this.requestUpdate(String.format("DELETE FROM CLASSE WHERE id='?'", this.id));
+		this.disconnect();
+
+	}
+
+	public static Classe getById(String id) {
+		SqlUtils sql = new SqlUtils();
+		sql.connect();
+		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CLASSE WHERE id='?'", id));
+		sql.disconnect();
+
+		try {
+			Classe classe = new Classe(set.getString("id"), set.getInt("promotion"), set.getString("filitere"));
+			return classe;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public static List<Classe> getAll() {
+		SqlUtils sql = new SqlUtils();
+		sql.connect();
+		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CLASSE "));
+		sql.disconnect();
+		List<Classe> result = new ArrayList<Classe>();
+
+		try {
+			while (set.next()) {
+				Classe classe = new Classe(set.getString("id"), set.getInt("promotion"), set.getString("filitere"));
+				result.add(classe);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return result;
 	}
 };
