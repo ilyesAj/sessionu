@@ -3,9 +3,13 @@
 // --------------------------------------------------------
 
 package Session;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.UUID;
 
 import org.json.*;
+
+import javafx.util.converter.LocalTimeStringConverter;
 
 
 /************************************************************/
@@ -48,7 +52,20 @@ public class SessionImplementation implements SessionInterface {
 	@Override
 	public String createCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		//init
+		String id =UUID.randomUUID().toString();
+		LocalTime debut =LocalTime.of(0, 0, 0);
+		LocalTime fin=LocalTime.of(0, 0, 0);;
+		LocalDate jour=LocalDate.of(0, 0, 0);
+		//parse
+		JSONObject obj = new JSONObject(JSONEntry);
+		debut =LocalTime.parse(obj.getString("debut"));
+		fin=LocalTime.parse(obj.getString("fin"));
+		jour=LocalDate.parse(obj.getString("jour"));
+		//create json
+		Creneau C = new Creneau(id, debut, fin, jour);
+		String ret = "{ \"id\": \""+id+"\"";
+		return ret;
 	}
 
 	@Override
