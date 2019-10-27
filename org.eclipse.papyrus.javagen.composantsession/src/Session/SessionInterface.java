@@ -12,50 +12,50 @@ public interface SessionInterface {
 	/**
 	 * 
 	 */
-	public void createEU();
+	public String createEU(String JSONEntry);
 
 	/**
 	 * 
 	 */
-	public void createCreneau();
+	public String createCreneau(String JSONEntry);
 
 	/**
 	 * 
 	 */
-	public void createClasse();
+	public String createClasse(String JSONEntry);
 
 	/**
 	 * 
 	 */
-	public void createSession();
+	public String createSession(String JSONEntry);
 
 	/**
 	 * 
 	 */
-	public void changeCreneauSession();
+	public String changeCreneauSession(String JSONEntry);
 
 	/**
 	 * 
 	 */
-	public void createSessionCreneau();
+	public String createSessionCreneau(String JSONEntry);
 
 	/**
 	 * 
 	 */
-	public void deleteEU();
+	public String deleteEU(String JSONEntry);
 
 	/**
 	 * 
 	 */
-	public void deleteCreneau();
+	public String deleteCreneau(String JSONEntry);
 
 	/**
 	 * 
 	 */
-	public void deleteSession();
+	public String deleteSession(String JSONEntry);
 
 	/**
 	 * 
 	 */
-	public void deleteClasse();
+	public String deleteClasse(String JSONEntry);
 };

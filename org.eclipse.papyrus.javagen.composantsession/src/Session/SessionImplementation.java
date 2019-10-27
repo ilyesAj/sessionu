@@ -3,6 +3,10 @@
 // --------------------------------------------------------
 
 package Session;
+import java.util.UUID;
+
+import org.json.*;
+
 
 /************************************************************/
 /**
@@ -11,62 +15,89 @@ package Session;
 public class SessionImplementation implements SessionInterface {
 
 	@Override
-	public void createEU() {
+	public String createEU(String JSONEntry) {
 		// TODO Auto-generated method stub
+		String intitule = null;
+		float tp = 0;
+		float cours = 0;
+		float valeur = 0;
+		float td = 0;
+		String code = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			code = obj.getString("code");
+			intitule = obj.getString("intitule");
+			cours = Float.parseFloat(obj.getString("cours"));
+			td = Float.parseFloat(obj.getString("td"));
+			tp = Float.parseFloat(obj.getString("tp"));
+			valeur = Float.parseFloat(obj.getString("valeur"));
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: code,intitule,cours,td,tp,valeur");
+			
+		}
+		String id = UUID.randomUUID().toString();
+		UniteEnseignement UE = new UniteEnseignement(id, code, intitule, cours, td, tp, valeur);
+
+		String ret = "{ \"id\": \""+id+"\"";
 		
+		return ret;
 	}
 
 	@Override
-	public void createCreneau() {
+	public String createCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void createClasse() {
+	public String createClasse(String JSONEntry) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void createSession() {
+	public String createSession(String JSONEntry) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void changeCreneauSession() {
+	public String changeCreneauSession(String JSONEntry) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void createSessionCreneau() {
+	public String createSessionCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void deleteEU() {
+	public String deleteEU(String JSONEntry) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void deleteCreneau() {
+	public String deleteCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void deleteSession() {
+	public String deleteSession(String JSONEntry) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override
-	public void deleteClasse() {
+	public String deleteClasse(String JSONEntry) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
+	
 };
