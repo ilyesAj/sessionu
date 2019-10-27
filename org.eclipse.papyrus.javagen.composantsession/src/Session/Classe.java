@@ -8,7 +8,7 @@ package Session;
 /**
  * 
  */
-public class Classe {
+public class Classe  {
 	/**
 	 * 
 	 */

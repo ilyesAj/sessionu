@@ -4,14 +4,18 @@
 
 package Session;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /************************************************************/
 /**
  * 
  */
-public class Creneau {
+public class Creneau extends SqlUtils {
 	/**
 	 * 
 	 */
@@ -36,15 +40,72 @@ public class Creneau {
 
 	/**
 	 * 
-	 * @param id 
-	 * @param debut 
-	 * @param fin 
-	 * @param jour 
+	 * @param id
+	 * @param debut
+	 * @param fin
+	 * @param jour
 	 */
 	public Creneau(String id, LocalTime debut, LocalTime fin, LocalDate jour) {
 		this.id = id;
 		this.debut = debut;
 		this.fin = fin;
 		this.jour = jour;
+	}
+
+	public void save() {
+		this.connect();
+		this.requestUpdate(String.format("INSERT INTO CRENEAU WHERE ID='?')", this.id, this.debut.toString(),
+				this.fin.toString(), this.jour.toString(), this.classe));
+		this.disconnect();
+	}
+
+	public void update() {
+		this.connect();
+		this.requestUpdate(String.format("UPDATE CRENEAU SET debut='?',fin='?',jour='?',classe='?' WHERE id='?'",
+				this.id, this.debut.toString(), this.fin.toString(), this.jour.toString(), this.classe, this.id));
+		this.disconnect();
+	}
+
+	public void delete() {
+		this.connect();
+		this.requestUpdate(String.format("DELETE FROM CRENEAU WHERE id='?'", this.id));
+		this.disconnect();
+
+	}
+
+	public static Creneau getById(String id) {
+		SqlUtils sql = new SqlUtils();
+		sql.connect();
+		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CRENEAU WHERE id='?'", id));
+		sql.disconnect();
+
+		try {
+			Creneau creneau = new Creneau(set.getString("id"), LocalTime.parse(set.getString("debut")),
+					LocalTime.parse(set.getString("fin")), LocalDate.parse(set.getString("jour")));
+			return creneau;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static List<Creneau> getAll() {
+		SqlUtils sql = new SqlUtils();
+		sql.connect();
+		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CRENEAU"));
+		sql.disconnect();
+		List<Creneau>result=new ArrayList<Creneau>();
+		
+		try {
+			while (set.next()) {
+			Creneau creneau = new Creneau(set.getString("id"), LocalTime.parse(set.getString("debut")),
+					LocalTime.parse(set.getString("fin")), LocalDate.parse(set.getString("jour")));
+			result.add(creneau);		
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return result;
 	}
 };

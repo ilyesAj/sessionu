@@ -6,12 +6,12 @@ package Session;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
 
-import org.json.*;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /************************************************************/
 /**
