@@ -44,7 +44,7 @@ public class UniteEnseignement {
 	/**
 	 * 
 	 */
-	public Creneau creneau;
+	public Creneau[] creneau;
 
 	/**
 	 * 
