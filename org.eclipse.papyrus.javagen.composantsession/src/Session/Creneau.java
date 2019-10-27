@@ -31,7 +31,8 @@ public class Creneau {
 	/**
 	 * 
 	 */
-	public Classe[] classe;
+	public Classe classe;
+	public UniteEnseignement uniteEnseignement;
 
 	/**
 	 * 
