@@ -64,8 +64,8 @@ public class SessionImplementation implements SessionInterface {
 			promotion = Integer.parseInt(obj.getString("promotion"));
 			filiere = obj.getString("filiere");
 		}catch(JSONException e) {
-			System.out.println("Unexpected json file, should be: code,intitule,cours,td,tp,valeur");
 			
+			System.out.println("Unexpected json file, should be: code,intitule,cours,td,tp,valeur");
 			
 		}
 		String id = UUID.randomUUID().toString();
