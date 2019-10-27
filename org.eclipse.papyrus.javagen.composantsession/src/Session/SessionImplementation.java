@@ -48,6 +48,7 @@ public class SessionImplementation implements SessionInterface {
 	@Override
 	public String createCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
+		System.out.println("Unexpected json file, should be: code,intitule,cours,td,tp,valeur");
 		return null;
 	}
 
