@@ -3,7 +3,7 @@
 // --------------------------------------------------------
 
 package Session;
-
+enum Status {Eleve,Enseignant};
 /************************************************************/
 /**
  * 
@@ -28,7 +28,7 @@ public class Personne {
 	/**
 	 * 
 	 */
-	private enum status {Eleve,Enseignant};
+	private Status status;
 
 	/**
 	 * 
@@ -38,6 +38,12 @@ public class Personne {
 	 * @param mail 
 	 * @param status 
 	 */
-	public Personne(String id, String prenom, String nom, String mail, String status) {
+	public Personne(String id, String prenom, String nom, String mail, Status status) {
+		
+		this.id = id;
+		this.prenom = prenom;
+		this.nom = nom;
+		this.mail = mail;
+		this.status = status;
 	}
 };

@@ -34,5 +34,8 @@ public class Classe {
 	 * @param filiere 
 	 */
 	public Classe(String id, int promotion, String filiere) {
+		this.id = id;
+		this.promotion = promotion;
+		this.filiere = filiere;
 	}
 };

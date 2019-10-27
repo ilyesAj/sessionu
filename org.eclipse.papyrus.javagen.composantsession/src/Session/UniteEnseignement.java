@@ -57,5 +57,12 @@ public class UniteEnseignement {
 	 * @param valeur 
 	 */
 	public UniteEnseignement(String id, String code, String intitule, float cours, float td, float tp, float valeur) {
+		this.id = id;
+		this.code = code;
+		this.intitule = intitule;
+		this.cours = cours;
+		this.td = td;
+		this.tp = tp;
+		this.valeur = valeur;
 	}
 };

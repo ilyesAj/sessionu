@@ -40,6 +40,10 @@ public class Creneau {
 	 * @param fin 
 	 * @param jour 
 	 */
-	public Creneau(String id, String debut, String fin, String jour) {
+	public Creneau(String id, LocalTime debut, LocalTime fin, LocalDate jour) {
+		this.id = id;
+		this.debut = debut;
+		this.fin = fin;
+		this.jour = jour;
 	}
 };
