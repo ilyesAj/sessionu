@@ -40,7 +40,7 @@ public class SessionImplementation implements SessionInterface {
 		String id = UUID.randomUUID().toString();
 		UniteEnseignement UE = new UniteEnseignement(id, code, intitule, cours, td, tp, valeur);
 
-		String ret = "{ \"id\": \""+id+"\"";
+		String ret = "{ \"id\": \""+id+"\" }";
 		
 		return ret;
 	}
@@ -77,7 +77,7 @@ public class SessionImplementation implements SessionInterface {
 		}
 		String id = UUID.randomUUID().toString();
 
-		String ret = "{ \"id\": \""+id+"\"";
+		String ret = "{ \"id\": \""+id+"\"}";
 		
 		return ret;
 	}
