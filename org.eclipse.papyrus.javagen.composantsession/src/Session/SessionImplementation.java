@@ -19,7 +19,7 @@ import org.json.*;
  */
 public class SessionImplementation implements SessionInterface {
 
-	public void initDatabase() throws SQLException {
+	public void initDatabase() {
 		Connection conn = null;
 		String url = "jdbc:sqlite:data.db";
 		try {
@@ -32,13 +32,44 @@ public class SessionImplementation implements SessionInterface {
 			System.out.println(e.getMessage());
 		}
 
-		String sql = "CREATE TABLE IF NOT EXISTS CRENEAU(ID TEXT PRIMARY KEY,debut TEXT,fin TEXT,jour TEXT,classe TEXT,FOREIGN KEY(classe) REFERENCES classe(id))";
+		String sql = "CREATE TABLE IF NOT EXISTS Personne(ID TEXT PRIMARY KEY,prenom TEXT,nom TEXT,mail TEXT,status TEXT)";
+		try (Statement stmt = conn.createStatement()) {
+			// create a new table
+			stmt.execute(sql);
+			System.out.println("personne table created");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		sql = "CREATE TABLE IF NOT EXISTS UniteEnseignement(ID TEXT PRIMARY KEY,code TEXT,intitule TEXT,cours REAL,td REAL,tp REAL,valeur REAL)";
+		try (Statement stmt = conn.createStatement()) {
+			// create a new table
+			stmt.execute(sql);
+			System.out.println("Ue table created");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		sql = "CREATE TABLE IF NOT EXISTS classe(ID TEXT PRIMARY KEY,promotion NUMBER,filiere TEXT)";
+		try (Statement stmt = conn.createStatement()) {
+			// create a new table
+			stmt.execute(sql);
+			System.out.println("classe table created");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+
+		sql = "CREATE TABLE IF NOT EXISTS CRENEAU(ID TEXT PRIMARY KEY,debut TEXT,fin TEXT,jour TEXT,classe TEXT,uniteEnseignement TEXT, FOREIGN KEY(classe) REFERENCES classe(id),FOREIGN KEY(uniteEnseignement) REFERENCES UniteEnseignement(id))";
 		try (Statement stmt = conn.createStatement()) {
 			// create a new table
 			stmt.execute(sql);
 			System.out.println("patient created");
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+		}
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
@@ -128,4 +159,8 @@ public class SessionImplementation implements SessionInterface {
 		return null;
 	}
 
+	public static void main(String[] args) {
+		SessionImplementation s = new SessionImplementation();
+		s.initDatabase();
+	}
 };
