@@ -90,7 +90,9 @@
         <ownedAttribute xmi:type="uml:Property" xmi:id="_Vz1iwvgAEemd1s4K8h9JJw" name="classe" type="_RiHBIPf7Eemd1s4K8h9JJw" association="_Vz07sPgAEemd1s4K8h9JJw">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Vz2J0fgAEemd1s4K8h9JJw" value="*"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_lGYfwvgAEemd1s4K8h9JJw" name="creneau" type="__QeK4Pf8Eemd1s4K8h9JJw" association="_lGX4sPgAEemd1s4K8h9JJw"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_lGYfwvgAEemd1s4K8h9JJw" name="creneau" type="__QeK4Pf8Eemd1s4K8h9JJw" association="_lGX4sPgAEemd1s4K8h9JJw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JuxkoPjgEemB79Uco_YC1g" value="*"/>
+        </ownedAttribute>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_KiiDEPf_Eemd1s4K8h9JJw" name="UniteEnseignement">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_Q9hwkPf_Eemd1s4K8h9JJw" name="id" direction="inout">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -167,9 +169,7 @@
         <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_lGYfwPgAEemd1s4K8h9JJw" source="org.eclipse.papyrus">
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_lGYfwfgAEemd1s4K8h9JJw" key="nature" value="UML_Nature"/>
         </eAnnotations>
-        <ownedEnd xmi:type="uml:Property" xmi:id="_lGYfxfgAEemd1s4K8h9JJw" name="uniteenseignement" type="_gYTR8Pf-Eemd1s4K8h9JJw" association="_lGX4sPgAEemd1s4K8h9JJw">
-          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nHjtUPgAEemd1s4K8h9JJw" value="*"/>
-        </ownedEnd>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_lGYfxfgAEemd1s4K8h9JJw" name="uniteenseignement" type="_gYTR8Pf-Eemd1s4K8h9JJw" association="_lGX4sPgAEemd1s4K8h9JJw"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_vTM5EPgAEemd1s4K8h9JJw" memberEnd="_vTOuQPgAEemd1s4K8h9JJw _vTPVUfgAEemd1s4K8h9JJw">
         <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_vTOHMPgAEemd1s4K8h9JJw" source="org.eclipse.papyrus">
