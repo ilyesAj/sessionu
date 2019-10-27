@@ -54,15 +54,63 @@ public class Creneau extends SqlUtils {
 
 	public void save() {
 		this.connect();
-		this.requestUpdate(String.format("INSERT INTO CRENEAU VALUES('?','?','?','?','?')", this.id,
-				this.debut.toString(), this.fin.toString(), this.jour.toString(), this.classe));
+		this.requestUpdate(String.format("INSERT INTO CRENEAU VALUES('?','?','?','?','?','?')", this.id,
+				this.debut.toString(), this.fin.toString(), this.jour.toString(), this.classe.getId(),this.uniteEnseignement.getId()));
 		this.disconnect();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public LocalTime getDebut() {
+		return debut;
+	}
+
+	public void setDebut(LocalTime debut) {
+		this.debut = debut;
+	}
+
+	public LocalTime getFin() {
+		return fin;
+	}
+
+	public void setFin(LocalTime fin) {
+		this.fin = fin;
+	}
+
+	public LocalDate getJour() {
+		return jour;
+	}
+
+	public void setJour(LocalDate jour) {
+		this.jour = jour;
+	}
+
+	public Classe getClasse() {
+		return classe;
+	}
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}
+
+	public UniteEnseignement getUniteEnseignement() {
+		return uniteEnseignement;
+	}
+
+	public void setUniteEnseignement(UniteEnseignement uniteEnseignement) {
+		this.uniteEnseignement = uniteEnseignement;
 	}
 
 	public void update() {
 		this.connect();
-		this.requestUpdate(String.format("UPDATE CRENEAU SET debut='?',fin='?',jour='?',classe='?' WHERE id='?'",
-				this.id, this.debut.toString(), this.fin.toString(), this.jour.toString(), this.classe, this.id));
+		this.requestUpdate(String.format("UPDATE CRENEAU SET debut='?',fin='?',jour='?',classe='?',uniteEnseignement='?' WHERE id='?'",
+				this.id, this.debut.toString(), this.fin.toString(), this.jour.toString(), this.classe.getId(),this.uniteEnseignement.getId(), this.id));
 		this.disconnect();
 	}
 

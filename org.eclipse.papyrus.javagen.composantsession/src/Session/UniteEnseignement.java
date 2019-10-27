@@ -71,6 +71,78 @@ public class UniteEnseignement extends SqlUtils {
 		this.valeur = valeur;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getIntitule() {
+		return intitule;
+	}
+
+	public void setIntitule(String intitule) {
+		this.intitule = intitule;
+	}
+
+	public float getCours() {
+		return cours;
+	}
+
+	public void setCours(float cours) {
+		this.cours = cours;
+	}
+
+	public float getTd() {
+		return td;
+	}
+
+	public void setTd(float td) {
+		this.td = td;
+	}
+
+	public float getTp() {
+		return tp;
+	}
+
+	public void setTp(float tp) {
+		this.tp = tp;
+	}
+
+	public float getValeur() {
+		return valeur;
+	}
+
+	public void setValeur(float valeur) {
+		this.valeur = valeur;
+	}
+
+	public Classe[] getClasse() {
+		return classe;
+	}
+
+	public void setClasse(Classe[] classe) {
+		this.classe = classe;
+	}
+
+	public Creneau[] getCreneau() {
+		return creneau;
+	}
+
+	public void setCreneau(Creneau[] creneau) {
+		this.creneau = creneau;
+	}
+
 	public void save() {
 		this.connect();
 		this.requestUpdate(String.format("INSERT INTO UniteEnseignement VALUES('?','?','?',?,?,?,?)", this.id,

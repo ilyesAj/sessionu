@@ -100,4 +100,36 @@ public class Classe extends SqlUtils {
 		}
 		return result;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public int getPromotion() {
+		return promotion;
+	}
+
+	public void setPromotion(int promotion) {
+		this.promotion = promotion;
+	}
+
+	public String getFiliere() {
+		return filiere;
+	}
+
+	public void setFiliere(String filiere) {
+		this.filiere = filiere;
+	}
+
+	public Personne[] getPersonne() {
+		return personne;
+	}
+
+	public void setPersonne(Personne[] personne) {
+		this.personne = personne;
+	}
 };
