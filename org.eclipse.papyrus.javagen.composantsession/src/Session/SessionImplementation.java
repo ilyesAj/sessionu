@@ -9,8 +9,6 @@ import java.util.UUID;
 
 import org.json.*;
 
-import javafx.util.converter.LocalTimeStringConverter;
-
 
 /************************************************************/
 /**
@@ -64,7 +62,7 @@ public class SessionImplementation implements SessionInterface {
 		jour=LocalDate.parse(obj.getString("jour"));
 		//create json
 		Creneau C = new Creneau(id, debut, fin, jour);
-		String ret = "{ \"id\": \""+id+"\"";
+		String ret = "{ \"id\": \""+id+"\"}";
 		return ret;
 	}
 
@@ -82,7 +80,7 @@ public class SessionImplementation implements SessionInterface {
 			filiere = obj.getString("filiere");
 		}catch(JSONException e) {
 			
-			System.out.println("Unexpected json file, should be: code,intitule,cours,td,tp,valeur");
+			System.out.println("Unexpected json file, should be: promotion,filiere");
 			
 		}
 		String id = UUID.randomUUID().toString();
@@ -138,25 +136,69 @@ public class SessionImplementation implements SessionInterface {
 	@Override
 	public String deleteEU(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UUID = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			UUID = obj.getString("UUID");
+		
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: UUID");
+			
+		}
+		return "{ \"result\": \"done\"}";
 	}
 
 	@Override
 	public String deleteCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UUID = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			UUID = obj.getString("UUID");
+		
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: UUID");
+			
+		}
+		return "{ \"result\": \"done\"}";
 	}
 
 	@Override
 	public String deleteSession(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UUID = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			UUID = obj.getString("UUID");
+		
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: UUID");
+			
+		}
+		return "{ \"result\": \"done\"}";
 	}
 
 	@Override
 	public String deleteClasse(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UUID = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			UUID = obj.getString("UUID");
+		
+			
+		}catch(JSONException e) {
+			System.out.println("Unexpected json file, should be: UUID");
+			
+		}
+		return "{ \"result\": \"done\"}";
 	}
 
 	
