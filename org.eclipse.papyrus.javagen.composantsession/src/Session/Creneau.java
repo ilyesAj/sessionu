@@ -113,8 +113,9 @@ public class Creneau extends SqlUtils {
 		this.connect();
 		this.requestUpdate(String.format(
 				"UPDATE CRENEAU SET debut='%s',fin='%s',jour='%s',classe='%s',uniteEnseignement='%s' WHERE id='%s'",
-				this.id, this.debut.toString(), this.fin.toString(), this.jour.toString(), this.classe.getId(),
-				this.uniteEnseignement.getId(), this.id));
+				this.id, this.debut.toString(), this.fin.toString(), this.jour.toString(),
+				this.classe == null ? "" : this.classe.getId(),
+				this.uniteEnseignement == null ? "" : this.uniteEnseignement.getId(), this.id));
 		this.disconnect();
 	}
 
