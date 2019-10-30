@@ -54,8 +54,10 @@ public class Creneau extends SqlUtils {
 
 	public void save() {
 		this.connect();
-		this.requestUpdate(String.format("INSERT INTO CRENEAU VALUES('?','?','?','?','?','?')", this.id,
-				this.debut.toString(), this.fin.toString(), this.jour.toString(), this.classe.getId(),this.uniteEnseignement.getId()));
+		this.requestUpdate(String.format("INSERT INTO CRENEAU VALUES('%s','%s','%s','%s','%s','%s')", this.id,
+				this.debut.toString(), this.fin.toString(), this.jour.toString(),
+				this.classe == null ? "" : this.classe.getId(),
+				this.uniteEnseignement == null ? "" : this.uniteEnseignement.getId()));
 		this.disconnect();
 	}
 
@@ -109,14 +111,16 @@ public class Creneau extends SqlUtils {
 
 	public void update() {
 		this.connect();
-		this.requestUpdate(String.format("UPDATE CRENEAU SET debut='?',fin='?',jour='?',classe='?',uniteEnseignement='?' WHERE id='?'",
-				this.id, this.debut.toString(), this.fin.toString(), this.jour.toString(), this.classe.getId(),this.uniteEnseignement.getId(), this.id));
+		this.requestUpdate(String.format(
+				"UPDATE CRENEAU SET debut='%s',fin='%s',jour='%s',classe='%s',uniteEnseignement='%s' WHERE id='%s'",
+				this.id, this.debut.toString(), this.fin.toString(), this.jour.toString(), this.classe.getId(),
+				this.uniteEnseignement.getId(), this.id));
 		this.disconnect();
 	}
 
 	public void delete() {
 		this.connect();
-		this.requestUpdate(String.format("DELETE FROM CRENEAU WHERE id='?'", this.id));
+		this.requestUpdate(String.format("DELETE FROM CRENEAU WHERE id='%s'", this.id));
 		this.disconnect();
 
 	}
@@ -124,15 +128,16 @@ public class Creneau extends SqlUtils {
 	public static Creneau getById(String id) {
 		SqlUtils sql = new SqlUtils();
 		sql.connect();
-		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CRENEAU WHERE id='?'", id));
-		sql.disconnect();
+		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CRENEAU WHERE id='%s'", id));
 
 		try {
 			Creneau creneau = new Creneau(set.getString("id"), LocalTime.parse(set.getString("debut")),
 					LocalTime.parse(set.getString("fin")), LocalDate.parse(set.getString("jour")));
+			sql.disconnect();
 			return creneau;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			sql.disconnect();
 			return null;
 		}
 	}
