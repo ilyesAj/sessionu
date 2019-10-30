@@ -102,10 +102,10 @@ public class SessionImplementation implements SessionInterface {
 		}
 		String id = UUID.randomUUID().toString();
 		UniteEnseignement UE = new UniteEnseignement(id, code, intitule, cours, td, tp, valeur);
-
-
-		String ret = "{ \"id\": \""+id+"\" }";
 		
+		UE.save();
+		
+		String ret = "{ \"id\": \"" + id + "\"}";
 
 		return ret;
 	}
@@ -113,56 +113,58 @@ public class SessionImplementation implements SessionInterface {
 	@Override
 	public String createCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
-		//init
-		String id =UUID.randomUUID().toString();
-		LocalTime debut =LocalTime.of(0, 0, 0);
-		LocalTime fin=LocalTime.of(0, 0, 0);;
-		LocalDate jour=LocalDate.of(0, 0, 0);
-		//parse
+		// init
+		String id = UUID.randomUUID().toString();
+		LocalTime debut = LocalTime.now();
+		LocalTime fin = LocalTime.now();
+		;
+		LocalDate jour = LocalDate.now();
+		// parse
 		JSONObject obj = new JSONObject(JSONEntry);
-		debut =LocalTime.parse(obj.getString("debut"));
-		fin=LocalTime.parse(obj.getString("fin"));
-		jour=LocalDate.parse(obj.getString("jour"));
-		//create json
-		Creneau C = new Creneau(id, debut, fin, jour);
-		String ret = "{ \"id\": \""+id+"\"}";
+		
+		
+		debut = LocalTime.parse(obj.getString("debut"));
+		fin = LocalTime.parse(obj.getString("fin"));
+		
+		jour = LocalDate.parse(obj.getString("jour"));
+		// create json
+		Creneau creneau = new Creneau(id, debut, fin, jour);
+		String ret = "{ \"id\": \"" + id + "\"}";
+		creneau.save();
 		return ret;
+
 	}
 
 	@Override
 	public String createClasse(String JSONEntry) {
 		// TODO Auto-generated method stub
-	
+
 		int promotion = 0;
-		String filiere = null; 
-		
+		String filiere = null;
+
 		JSONObject obj = new JSONObject(JSONEntry);
-		
+
 		try {
 			promotion = Integer.parseInt(obj.getString("promotion"));
 			filiere = obj.getString("filiere");
-		}catch(JSONException e) {
-			
+		} catch (JSONException e) {
+
 			System.out.println("Unexpected json file, should be: promotion,filiere");
-			
+
 		}
 		String id = UUID.randomUUID().toString();
-		Classe classe= new Classe(id,promotion,filiere);
+		Classe classe = new Classe(id, promotion, filiere);
 
-		String ret = "{ \"id\": \""+id+"\"}";
-			
-		return ret;	
+		String ret = "{ \"id\": \"" + id + "\"}";
+		classe.save();
+		return ret;
 
-		
-		
-		
-		
 	}
 
 	@Override
 	public String createSession(String JSONEntry) {
 		// TODO Auto-generated method stub
-		String UE = null ;
+		String UE = null;
 		String classe = null;
 		String creneau = null;
 		JSONObject obj = new JSONObject(JSONEntry);
@@ -171,17 +173,18 @@ public class SessionImplementation implements SessionInterface {
 			UE = obj.getString("UE");
 			classe = obj.getString("classe");
 			creneau = obj.getString("creneau");
-			
-			
-		}catch(JSONException e) {
-			System.out.println("Unexpected json file, should be: UE,classe,creneau");
-			
-		}
-		String id = UUID.randomUUID().toString();
 
-		String ret = "{ \"id\": \""+id+"\"}";
-		
-		return ret;
+		} catch (JSONException e) {
+			System.out.println("Unexpected json file, should be: UE,classe,creneau");
+
+		}
+		//String id = UUID.randomUUID().toString();
+		this.createClasse(classe);
+		this.createCreneau(creneau);
+		this.createEU(UE);
+		// String ret = "{ \"id\": \"" + id + "\"}";
+		return "{ \"result\": \"done\"}";
+		// return ret;
 	}
 
 	@Override
@@ -204,12 +207,12 @@ public class SessionImplementation implements SessionInterface {
 		try {
 
 			UUID = obj.getString("UUID");
-		
-			
-		}catch(JSONException e) {
+
+		} catch (JSONException e) {
 			System.out.println("Unexpected json file, should be: UUID");
-			
+
 		}
+		UniteEnseignement.getById(UUID).delete();
 		return "{ \"result\": \"done\"}";
 	}
 
@@ -221,12 +224,12 @@ public class SessionImplementation implements SessionInterface {
 		try {
 
 			UUID = obj.getString("UUID");
-		
-			
-		}catch(JSONException e) {
+
+		} catch (JSONException e) {
 			System.out.println("Unexpected json file, should be: UUID");
-			
+
 		}
+		Creneau.getById(UUID).delete();
 		return "{ \"result\": \"done\"}";
 	}
 
@@ -238,11 +241,10 @@ public class SessionImplementation implements SessionInterface {
 		try {
 
 			UUID = obj.getString("UUID");
-		
-			
-		}catch(JSONException e) {
+
+		} catch (JSONException e) {
 			System.out.println("Unexpected json file, should be: UUID");
-			
+
 		}
 		return "{ \"result\": \"done\"}";
 	}
@@ -255,16 +257,15 @@ public class SessionImplementation implements SessionInterface {
 		try {
 
 			UUID = obj.getString("UUID");
-		
-			
-		}catch(JSONException e) {
+
+		} catch (JSONException e) {
 			System.out.println("Unexpected json file, should be: UUID");
-			
+
 		}
+		Classe.getById(UUID).delete();
 		return "{ \"result\": \"done\"}";
 	}
 
-	
 	
 	
 };
