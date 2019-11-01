@@ -22,7 +22,7 @@ import org.json.JSONObject;
  */
 public class SessionImplementation implements SessionInterface {
 
-	public void initDatabase() {
+	public void initDatabase() throws ClassNotFoundException {
 		Connection conn = null;
 		String url = "jdbc:sqlite:data.db";
 		try {
@@ -117,7 +117,6 @@ public class SessionImplementation implements SessionInterface {
 		String id = UUID.randomUUID().toString();
 		LocalTime debut = LocalTime.now();
 		LocalTime fin = LocalTime.now();
-		;
 		LocalDate jour = LocalDate.now();
 		// parse
 		JSONObject obj = new JSONObject(JSONEntry);
@@ -267,7 +266,7 @@ public class SessionImplementation implements SessionInterface {
 		}
 		try {
 			UniteEnseignement.getById(UUID).delete();
-			return "{ \"result\": \"done\" ,  \"type\": \"EU\" \"UUID\": \"" + UUID + "\"  }";
+			return "{ \"result\": \"done\" ,  \"type\": \"EU\" , \"UUID\": \"" + UUID + "\"  }";
 
 		} catch (Exception e) {
 			return "{ \"result\": \"error\" ,  \"type\": \"EU inexistant\"   }";
@@ -290,7 +289,7 @@ public class SessionImplementation implements SessionInterface {
 		}
 		try {
 			Creneau.getById(UUID).delete();
-			return "{ \"result\": \"done\" ,  \"type\": \"creneau\" \"UUID\": \"" + UUID + "\"  }";
+			return "{ \"result\": \"done\" ,  \"type\": \"creneau\" , \"UUID\": \"" + UUID + "\"  }";
 		} catch (Exception e) {
 			return "{ \"result\": \"error\" ,  \"type\": \"creneau inexistant\"   }";
 
@@ -344,11 +343,48 @@ public class SessionImplementation implements SessionInterface {
 		}
 		try {
 			Classe.getById(UUID).delete();
-			return "{ \"result\": \"done\" ,  \"type\": \"classe\" \"UUID\": \"" + UUID + "\"  }";
+			return "{ \"result\": \"done\" ,  \"type\": \"classe\" , \"UUID\": \"" + UUID + "\"  }";
 		} catch (Exception e) {
 			return "{ \"result\": \"error\" ,  \"type\": \"classe inexistante\"   }";
 
 		}
 	}
+
+	@Override
+	public String getClasse(String JSONEntry) {
+		// TODO This should return JSON
+		JSONObject obj = new JSONObject(JSONEntry);
+		Classe x = Classe.getById(obj.getString("id"));
+		return " " ;
+		
+	}
+
+	@Override
+	public String getSession(String JSONEntry) {
+		// TODO This should return JSON
+		JSONObject obj = new JSONObject(JSONEntry);
+		
+		return " " ;
+	}
+
+	@Override
+	public String getCreneau(String JSONEntry) {
+		// TODO This should return JSON
+		JSONObject obj = new JSONObject(JSONEntry);
+		Creneau x = Creneau.getById(obj.getString("id"));
+		return " " ;
+	}
+
+	@Override
+	public String getUE(String JSONEntry) {
+		// TODO This should return JSON
+		JSONObject obj = new JSONObject(JSONEntry);
+		UniteEnseignement x = UniteEnseignement.getById(obj.getString("id"));
+		return " " ;
+	}
+	
+	//TODO methods that returns all of everything.
+
+	
 
 };
