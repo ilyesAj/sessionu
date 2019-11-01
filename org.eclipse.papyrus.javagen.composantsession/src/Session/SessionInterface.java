@@ -63,4 +63,8 @@ public interface SessionInterface {
 	public String getSession(String JSONEntry);
 	public String getCreneau(String JSONEntry);
 	public String getUE(String JSONEntry);
+	public String listClasse();
+	public String listSession();
+	public String listCreneau();
+	public String listEU();
 };

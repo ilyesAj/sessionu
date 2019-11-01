@@ -162,4 +162,10 @@ public class Creneau extends SqlUtils {
 		}
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "" + id + " ; " + debut + " ; " + fin + " ; " + jour + "\n";
+	}
+	
 };

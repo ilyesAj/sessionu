@@ -7,6 +7,7 @@ package Session;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /************************************************************/
@@ -82,6 +83,11 @@ public class Classe extends SqlUtils {
 			return null;
 		}
 		
+	}
+
+	@Override
+	public String toString() {
+		return "" + id + " ; " + promotion + " ; " + filiere + " \n";
 	}
 
 	public static List<Classe> getAll() {

@@ -7,6 +7,7 @@ package Session;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /************************************************************/
@@ -208,4 +209,11 @@ public class UniteEnseignement extends SqlUtils {
 		}
 		return result;
 	}
+
+	@Override
+	public String toString() {
+		return "" + id + " ; " + code + " ; " + intitule + " ; " + cours
+				+ " ; " + td + " ; " + tp + " ; " + valeur + " \n " ;
+	}
+	
 };

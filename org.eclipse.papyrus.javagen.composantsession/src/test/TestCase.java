@@ -1,9 +1,10 @@
 package test;
 
+import Session.Classe;
 import Session.SessionImplementation;
 
 public class TestCase {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		SessionImplementation si = new SessionImplementation();
 		si.initDatabase();
 
@@ -24,7 +25,7 @@ public class TestCase {
 				+ resCl.replace("id", "classe").substring(1, resCl.length() + 3) + "}";
 
 		String crSres = si.createSession(session);
-
+		
 		System.out.println(si.changeCreneauSession(crSres));
 		System.out.println(si.createSessionCreneau(crSres));
 

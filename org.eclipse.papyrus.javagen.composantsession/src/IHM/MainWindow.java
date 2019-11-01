@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.awt.event.ActionEvent;
 import Session.SessionImplementation;
 import javax.swing.JTextArea;
@@ -27,7 +29,7 @@ public class MainWindow {
 	 */
 	private void initialize(SessionImplementation sess) {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 600);
+		frame.setBounds(100, 100, 600, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -72,39 +74,39 @@ public class MainWindow {
 		
 		JFormattedTextField td = new JFormattedTextField();
 		td.setText("TD");
-		td.setBounds(167, 63, 28, 26);
+		td.setBounds(167, 63, 79, 26);
 		frame.getContentPane().add(td);
 		
 		JFormattedTextField tp = new JFormattedTextField();
 		tp.setText("TP");
-		tp.setBounds(194, 63, 25, 26);
+		tp.setBounds(247, 63, 79, 26);
 		frame.getContentPane().add(tp);
 		
 		JFormattedTextField cours = new JFormattedTextField();
 		cours.setText("Cours");
-		cours.setBounds(218, 63, 57, 26);
+		cours.setBounds(332, 63, 79, 26);
 		frame.getContentPane().add(cours);
 		
 		JFormattedTextField valeur = new JFormattedTextField();
 		valeur.setText("Valeur");
-		valeur.setBounds(277, 63, 52, 26);
+		valeur.setBounds(411, 63, 68, 26);
 		frame.getContentPane().add(valeur);
 		
 		JFormattedTextField idClasse = new JFormattedTextField();
 		idClasse.setText("ID");
-		idClasse.setBounds(6, 186, 79, 26);
+		idClasse.setBounds(6, 186, 295, 26);
 		frame.getContentPane().add(idClasse);
 		
 		
 		JFormattedTextField idCreneau = new JFormattedTextField();
 		idCreneau.setText("ID");
-		idCreneau.setBounds(6, 214, 79, 26);
+		idCreneau.setBounds(6, 214, 295, 26);
 		frame.getContentPane().add(idCreneau);
 		
 		
 		JFormattedTextField idUE = new JFormattedTextField();
 		idUE.setText("ID");
-		idUE.setBounds(6, 243, 79, 26);
+		idUE.setBounds(6, 243, 295, 26);
 		frame.getContentPane().add(idUE);
 		
 		
@@ -127,12 +129,12 @@ public class MainWindow {
 		
 		JFormattedTextField idSession = new JFormattedTextField();
 		idSession.setText("ID");
-		idSession.setBounds(6, 157, 79, 26);
+		idSession.setBounds(6, 157, 295, 26);
 		frame.getContentPane().add(idSession);
 		
 		JTextArea console = new JTextArea();
 		console.setEditable(false);
-		console.setBounds(6, 342, 438, 230);
+		console.setBounds(6, 342, 588, 230);
 		frame.getContentPane().add(console);
 		
 		JButton dSession = new JButton("Supprimer session");
@@ -151,11 +153,11 @@ public class MainWindow {
 				
 			}
 		});
-		dSession.setBounds(286, 157, 158, 29);
+		dSession.setBounds(436, 157, 158, 29);
 		frame.getContentPane().add(dSession);
 		
 		JButton vSession = new JButton("Afficher session");
-		vSession.setBounds(140, 157, 135, 29);
+		vSession.setBounds(303, 157, 135, 29);
 		frame.getContentPane().add(vSession);
 		
 		JButton cSession = new JButton("Creer session");
@@ -172,7 +174,7 @@ public class MainWindow {
 				//TODO: Find a solution for session creation
 			}
 		});
-		cSession.setBounds(327, 90, 117, 29);
+		cSession.setBounds(477, 90, 117, 29);
 		frame.getContentPane().add(cSession);
 		
 		JButton dUE = new JButton("Supprimer UE");
@@ -189,23 +191,93 @@ public class MainWindow {
 					console.append("Erreur suppression vérfier l'exitence de l'id");
 			}
 		});
-		dUE.setBounds(286, 243, 158, 29);
+		dUE.setBounds(436, 243, 158, 29);
 		frame.getContentPane().add(dUE);
 		
 		JButton vClasse = new JButton("Afficher classe");
 		vClasse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JSONObject req = new JSONObject();
+				req.put("id", idClasse.getText());
+				String rep = sess.getClasse(req.toString());
+				if (!rep.equals("erreur"))
+				{
+					JSONObject view  = new JSONObject(rep);
+					String id = view.getString("id");
+					int promotion = Integer.parseInt(view.getString("promotion"));
+					String filiere = view.getString("filiere");
+					console.setText("");
+					console.append("ID;Promotion;Filiere \n");
+					console.append(""+id+" ; "+ promotion +" ; "+ filiere +"\n");
+				}
+				else
+				{
+					console.setText("");
+					console.append("Erreur affichage vérfier l'exitence de l'id\n");
+				}
+					
+				
 			}
 		});
-		vClasse.setBounds(140, 186, 135, 29);
+		vClasse.setBounds(303, 186, 135, 29);
 		frame.getContentPane().add(vClasse);
 		
 		JButton vCreneau = new JButton("Afficher creneau");
-		vCreneau.setBounds(140, 214, 135, 29);
+		vCreneau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JSONObject req = new JSONObject();
+				req.put("id", idCreneau.getText());
+				String rep = sess.getCreneau(req.toString());
+				if (!rep.equals("erreur"))
+				{
+					JSONObject view  = new JSONObject(rep);
+					String id = view.getString("id");
+					LocalTime debut = LocalTime.parse(view.getString("debut"));
+					LocalTime fin = LocalTime.parse(view.getString("fin"));
+					LocalDate jour = LocalDate.parse(view.getString("jour"));
+					console.setText("");
+					console.append("ID;debut;fin;jour \n");
+					console.append(""+id+" ; "+ debut +" ; "+ fin +" ; "+jour +"\n");
+				}
+				else
+				{
+					console.setText("");
+					console.append("Erreur affichage vérfier l'exitence de l'id\n");
+				}
+				
+			}
+		});
+		vCreneau.setBounds(303, 214, 135, 29);
 		frame.getContentPane().add(vCreneau);
 		
 		JButton vUE = new JButton("Afficher UE");
-		vUE.setBounds(140, 243, 135, 29);
+		vUE.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JSONObject req = new JSONObject();
+				req.put("id", idUE.getText());
+				String rep = sess.getUE(req.toString());
+				if (!rep.equals("erreur"))
+				{
+					JSONObject view  = new JSONObject(rep);
+					String id = view.getString("id");
+					String code = view.getString("code");
+					String intitule = view.getString("intitule");
+					float cours = Float.parseFloat(view.getString("cours"));
+					float td = Float.parseFloat(view.getString("td"));
+					float tp = Float.parseFloat(view.getString("tp"));
+					float valeur = Float.parseFloat(view.getString("valeur"));
+					console.setText("");
+					console.append("ID;code;intitule;cours;td;tp;valeur \n");
+					console.append(""+id+" ; "+ code +" ; "+ intitule +" ; "+cours +" ; "+td+ " ; "+ tp +" ; "+valeur+"\n");
+				}
+				else
+				{
+					console.setText("");
+					console.append("Erreur affichage vérfier l'exitence de l'id\n");
+				}
+			}
+		});
+		vUE.setBounds(303, 243, 135, 29);
 		frame.getContentPane().add(vUE);
 		
 		JButton dCreneau = new JButton("Supprimer creneau");
@@ -223,7 +295,7 @@ public class MainWindow {
 				//TODO: This needs testing (not tested)
 			}
 		});
-		dCreneau.setBounds(286, 214, 158, 29);
+		dCreneau.setBounds(436, 214, 158, 29);
 		frame.getContentPane().add(dCreneau);
 		
 		JButton dClasse = new JButton("Supprimer classe");
@@ -240,7 +312,7 @@ public class MainWindow {
 					console.append("Erreur suppression vérfier l'exitence de l'id");
 			}
 		});
-		dClasse.setBounds(286, 186, 158, 29);
+		dClasse.setBounds(436, 186, 158, 29);
 		frame.getContentPane().add(dClasse);
 		
 		JButton cUE = new JButton("Creer UE");
@@ -265,7 +337,7 @@ public class MainWindow {
 				
 			}
 		});
-		cUE.setBounds(327, 63, 117, 29);
+		cUE.setBounds(477, 63, 117, 29);
 		frame.getContentPane().add(cUE);
 		
 		JButton cCreneau = new JButton("Creer creneau");
@@ -285,7 +357,7 @@ public class MainWindow {
 				
 			}
 		});
-		cCreneau.setBounds(327, 34, 117, 29);
+		cCreneau.setBounds(477, 34, 117, 29);
 		frame.getContentPane().add(cCreneau);
 		
 		JButton cClasse = new JButton("Creer classe");
@@ -302,7 +374,7 @@ public class MainWindow {
 				
 			}
 		});
-		cClasse.setBounds(327, 6, 117, 29);
+		cClasse.setBounds(477, 6, 117, 29);
 		frame.getContentPane().add(cClasse);
 		
 		JButton lSession = new JButton("Lister sessions");
@@ -310,15 +382,43 @@ public class MainWindow {
 		frame.getContentPane().add(lSession);
 		
 		JButton lClasse = new JButton("Lister classes");
+		lClasse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ls = sess.listClasse();
+				JSONObject obj = new JSONObject(ls);
+				console.setText("");
+				console.append("ID;Promotion;Filiere \n");
+				console.append(obj.getString("response"));
+				
+			}
+		});
 		lClasse.setBounds(162, 281, 127, 29);
 		frame.getContentPane().add(lClasse);
 		
 		JButton lCreneau = new JButton("Lister creneaux");
+		lCreneau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ls = sess.listCreneau();
+				JSONObject obj = new JSONObject(ls);
+				console.setText("");
+				console.append("ID;debut;fin;jour \n");
+				console.append(obj.getString("response"));
+			}
+		});
 		lCreneau.setBounds(317, 281, 127, 29);
 		frame.getContentPane().add(lCreneau);
 		
 		JButton lUE = new JButton("Lister UE");
-		lUE.setBounds(162, 311, 127, 29);
+		lUE.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ls = sess.listEU();
+				JSONObject obj = new JSONObject(ls);
+				console.setText("");
+				console.append("ID;code;intitule;cours;td;tp;valeur \n");
+				console.append(obj.getString("response"));
+			}
+		});
+		lUE.setBounds(467, 281, 127, 29);
 		frame.getContentPane().add(lUE);
 		
 		

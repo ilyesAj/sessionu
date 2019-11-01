@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.UUID;
 
 import org.json.JSONException;
@@ -355,7 +356,16 @@ public class SessionImplementation implements SessionInterface {
 		// TODO This should return JSON
 		JSONObject obj = new JSONObject(JSONEntry);
 		Classe x = Classe.getById(obj.getString("id"));
-		return " " ;
+		if (x != null)
+		{	
+			int promo = x.getPromotion();
+			String fil = x.getFiliere();
+			obj.put("promotion", String.valueOf(promo));
+			obj.put("filiere", fil);
+			return obj.toString() ;
+		}
+		else
+			return "erreur"; 
 		
 	}
 
@@ -363,7 +373,7 @@ public class SessionImplementation implements SessionInterface {
 	public String getSession(String JSONEntry) {
 		// TODO This should return JSON
 		JSONObject obj = new JSONObject(JSONEntry);
-		
+		//TODO we need to find a way to show sessions (not yet implemented)
 		return " " ;
 	}
 
@@ -372,7 +382,19 @@ public class SessionImplementation implements SessionInterface {
 		// TODO This should return JSON
 		JSONObject obj = new JSONObject(JSONEntry);
 		Creneau x = Creneau.getById(obj.getString("id"));
-		return " " ;
+		if (x != null)
+		{
+			LocalTime deb = x.getDebut();
+			LocalTime fi = x.getFin();
+			LocalDate jo = x.getJour();
+			obj.put("debut", deb.toString());
+			obj.put("fin",fi.toString());
+			obj.put("jour", jo.toString());
+			return obj.toString() ;
+		}
+		else
+			return "erreur"; 
+			
 	}
 
 	@Override
@@ -380,7 +402,72 @@ public class SessionImplementation implements SessionInterface {
 		// TODO This should return JSON
 		JSONObject obj = new JSONObject(JSONEntry);
 		UniteEnseignement x = UniteEnseignement.getById(obj.getString("id"));
-		return " " ;
+		if (x != null)
+		{
+			obj.put("code", x.getCode());
+			obj.put("intitule", x.getIntitule());
+			obj.put("cours", String.valueOf(x.getCours()));
+			obj.put("td", String.valueOf(x.getTd()));
+			obj.put("tp", String.valueOf(x.getTp()));
+			obj.put("valeur", String.valueOf(x.getValeur()));
+			return obj.toString() ;
+		}
+		else
+			return "erreur"; 
+		
+		
+	}
+
+	@Override
+	public String listClasse() {
+		// TODO Auto-generated method stub
+		List <Classe>  x = Classe.getAll();
+		String resp = "";
+		for (int i= 0 ; i < x.size();i++)
+		{
+			resp = resp + x.get(i).toString();
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("response", resp);
+		
+		return obj.toString();
+	}
+
+	@Override
+	public String listSession() {
+		// TODO Auto-generated method stub
+		return null;
+		// TODO list all Sessions
+	}
+
+	@Override
+	public String listCreneau() {
+		// TODO Auto-generated method stub
+		List <Creneau>  x = Creneau.getAll();
+		String resp = "";
+		for (int i= 0 ; i < x.size();i++)
+		{
+			resp = resp + x.get(i).toString();
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("response", resp);
+		
+		return obj.toString();
+	}
+
+	@Override
+	public String listEU() {
+		// TODO Auto-generated method stub
+		List <UniteEnseignement>  x = UniteEnseignement.getAll();
+		String resp = "";
+		for (int i= 0 ; i < x.size();i++)
+		{
+			resp = resp + x.get(i).toString();
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("response", resp);
+		
+		return obj.toString();
 	}
 	
 	//TODO methods that returns all of everything.
