@@ -2,7 +2,7 @@ Groupe Session
 # architecture
 ## class diagram
 ![class-Diagram.PNG](./_resources/class-Diagram.PNG)
-## Functional Requirments 
+## Functional Requirements 
 | ID         | Satisfied | Unsatisfied |
 |------------|-----------|-------------|
 | Req-ses-01 |     X     |             |
