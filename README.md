@@ -43,7 +43,6 @@ sudo update-alternatives --config java
 Choose the number associated with the **java-8-openjdk** version to use it as the default, or press ENTER to leave the current settings in place.
 
 # Using release 
-This section is for all users (Mac Os , Linux , Windows)
 ## Importing project into eclipse
 ### Getting and extracting archive
 ````sh
@@ -51,6 +50,8 @@ cd ~
 wget https://github.com/ilyesAj/sessionu/releases/download/0.1/eclipse_import.zip
 ````
 ### Importing project into workspace via UI 
+This section is for all users (Mac Os , Linux , Windows)
+
 1.     Click File -> Import -> from the Eclipse main menu
 2.     Expand General, select **Existing Projects into Workspace**, and click Next
 3.     Make sure that **Select Archive File is checked** and browse for VectorProducts.zip and browse for the ZIP file
