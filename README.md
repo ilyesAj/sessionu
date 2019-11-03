@@ -78,6 +78,23 @@ sudo chmod +x executable.jar
 java -jar executable.jar
 ````
 # Usage 
+default window of the IHM : 
+![47f91db53876ba6b3a5818336084d707.png](./_resources/c87026f17f0a4a8b8bf47174419dbaa4.png)
 
+Once we get the binary executed we can : 
+ 
+                • Create a « classe » adding a « promotion » (INT) and « filière » (STRING)
+                •  Create « créneau » adding starting and ending hours of the course« début » « fin » (LocalTime) and the day « jour » (LocalDate)
+                • Create « une unité d’enseignement » adding « code » and «intitulé» in (STRING) and  « TD, TP, Cours , valeurs »  in ( FLOAT)
+                • Create « session » adding « id classe, id créneau , id d’unité d’enseignement » in (STRING)
+Example:
+![3144fdf2e86dae7604fd723a56ff276d.png](./_resources/89d513c050304676a2774919f5d89994.png)
 
-# Roadmap
+We can also
+            ▪ Get or delete  « classe, créneau and  EU ».
+# Anomalies 
+## Non-implemented fonctionality
+            ▪ Lister une session
+
+## Non-operational fonctionality:
+            ▪ Lister une classe / créneau / UE
