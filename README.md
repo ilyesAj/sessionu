@@ -2,7 +2,19 @@ Install
 # architecture
 ## class diagram
 ![class-Diagram.PNG](./_resources/class-Diagram.PNG)
-
+## Functional Requirments 
+| ID         | Satisfied | Unsatisfied |
+|------------|-----------|-------------|
+| Req-ses-01 |     X     |             |
+| Req-ses-02 |     X     |             |
+| Req-ses-03 |     X     |             |
+| Req-ses-04 |     X     |             |
+| Req-ses-05 |     X     |             |
+| Req-ses-06 |     X     |             |
+| Req-ses-07 |     X     |             |
+| Req-ses-08 |     X     |             |
+| Req-ses-09 |           |      X      |
+| Req-ses-10 |           |      X      |
 # Install
 ## Requirements
 - access to internet 
