@@ -14,7 +14,7 @@ java --version
 # expected 
 #openjdk version "1.8.0_162"
 ````
-### Installing java 80
+### Installing java 8
 ````sh
 sudo apt update
 sudo apt install openjdk-8-jdk -y
