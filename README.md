@@ -25,7 +25,7 @@ sudo update-alternatives --config java
 ````
 
 
-![de819695b4183d79042aec17eaea8891.png](../_resources/f18cf487836747c68c4834dc7b729f5c.png)
+![de819695b4183d79042aec17eaea8891.png](./_resources/f18cf487836747c68c4834dc7b729f5c.png)
 
 
 Choose the number associated with the **java-8-openjdk** version to use it as the default, or press ENTER to leave the current settings in place.
