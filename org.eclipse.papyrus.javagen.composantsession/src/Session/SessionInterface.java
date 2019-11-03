@@ -58,4 +58,13 @@ public interface SessionInterface {
 	 * 
 	 */
 	public String deleteClasse(String JSONEntry);
+	
+	public String getClasse(String JSONEntry);
+	public String getSession(String JSONEntry);
+	public String getCreneau(String JSONEntry);
+	public String getUE(String JSONEntry);
+	public String listClasse();
+	public String listSession();
+	public String listCreneau();
+	public String listEU();
 };

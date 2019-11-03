@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.UUID;
 
 import org.json.JSONException;
@@ -22,7 +23,7 @@ import org.json.JSONObject;
  */
 public class SessionImplementation implements SessionInterface {
 
-	public void initDatabase() {
+	public void initDatabase() throws ClassNotFoundException {
 		Connection conn = null;
 		String url = "jdbc:sqlite:data.db";
 		try {
@@ -103,9 +104,9 @@ public class SessionImplementation implements SessionInterface {
 		String id = UUID.randomUUID().toString();
 		UniteEnseignement UE = new UniteEnseignement(id, code, intitule, cours, td, tp, valeur);
 
+		UE.save();
 
-		String ret = "{ \"id\": \""+id+"\" }";
-		
+		String ret = "{ \"id\": \"" + id + "\"}";
 
 		return ret;
 	}
@@ -113,56 +114,56 @@ public class SessionImplementation implements SessionInterface {
 	@Override
 	public String createCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
-		//init
-		String id =UUID.randomUUID().toString();
-		LocalTime debut =LocalTime.of(0, 0, 0);
-		LocalTime fin=LocalTime.of(0, 0, 0);;
-		LocalDate jour=LocalDate.of(0, 0, 0);
-		//parse
+		// init
+		String id = UUID.randomUUID().toString();
+		LocalTime debut = LocalTime.now();
+		LocalTime fin = LocalTime.now();
+		LocalDate jour = LocalDate.now();
+		// parse
 		JSONObject obj = new JSONObject(JSONEntry);
-		debut =LocalTime.parse(obj.getString("debut"));
-		fin=LocalTime.parse(obj.getString("fin"));
-		jour=LocalDate.parse(obj.getString("jour"));
-		//create json
-		Creneau C = new Creneau(id, debut, fin, jour);
-		String ret = "{ \"id\": \""+id+"\"}";
+
+		debut = LocalTime.parse(obj.getString("debut"));
+		fin = LocalTime.parse(obj.getString("fin"));
+
+		jour = LocalDate.parse(obj.getString("jour"));
+		// create json
+		Creneau creneau = new Creneau(id, debut, fin, jour);
+		String ret = "{ \"id\": \"" + id + "\"}";
+		creneau.save();
 		return ret;
+
 	}
 
 	@Override
 	public String createClasse(String JSONEntry) {
 		// TODO Auto-generated method stub
-	
+
 		int promotion = 0;
-		String filiere = null; 
-		
+		String filiere = null;
+
 		JSONObject obj = new JSONObject(JSONEntry);
-		
+
 		try {
 			promotion = Integer.parseInt(obj.getString("promotion"));
 			filiere = obj.getString("filiere");
-		}catch(JSONException e) {
-			
+		} catch (JSONException e) {
+
 			System.out.println("Unexpected json file, should be: promotion,filiere");
-			
+
 		}
 		String id = UUID.randomUUID().toString();
-		Classe classe= new Classe(id,promotion,filiere);
+		Classe classe = new Classe(id, promotion, filiere);
 
-		String ret = "{ \"id\": \""+id+"\"}";
-			
-		return ret;	
+		String ret = "{ \"id\": \"" + id + "\"}";
+		classe.save();
+		return ret;
 
-		
-		
-		
-		
 	}
 
 	@Override
 	public String createSession(String JSONEntry) {
 		// TODO Auto-generated method stub
-		String UE = null ;
+		String UE = null;
 		String classe = null;
 		String creneau = null;
 		JSONObject obj = new JSONObject(JSONEntry);
@@ -171,29 +172,84 @@ public class SessionImplementation implements SessionInterface {
 			UE = obj.getString("UE");
 			classe = obj.getString("classe");
 			creneau = obj.getString("creneau");
-			
-			
-		}catch(JSONException e) {
-			System.out.println("Unexpected json file, should be: UE,classe,creneau");
-			
-		}
-		String id = UUID.randomUUID().toString();
 
-		String ret = "{ \"id\": \""+id+"\"}";
-		
-		return ret;
+			UniteEnseignement ue = UniteEnseignement.getById(UE);
+			Classe objClasse = Classe.getById(classe);
+			Creneau cr = Creneau.getById(creneau);
+
+			cr.setUniteEnseignement(ue);
+			cr.setClasse(objClasse);
+			cr.update();
+
+		} catch (JSONException e) {
+			System.out.println("Unexpected json file, should be: UE,classe,creneau");
+
+		}
+		// String id = UUID.randomUUID().toString();
+
+		// String ret = "{ \"id\": \"" + id + "\"}";
+		return "{ \"result\": \"done\"}";
+		// return ret;
 	}
 
 	@Override
 	public String changeCreneauSession(String JSONEntry) {
+
 		// TODO Auto-generated method stub
-		return null;
+		String UE = null;
+		String classe = null;
+		String creneau = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			classe = obj.getString("classe");
+			creneau = obj.getString("creneau");
+
+			Classe objClasse = Classe.getById(classe);
+			Creneau cr = Creneau.getById(creneau);
+
+			cr.setClasse(objClasse);
+			cr.update();
+
+		} catch (JSONException e) {
+			System.out.println("Unexpected json file, should be: UE,classe,creneau");
+
+		}
+		// String id = UUID.randomUUID().toString();
+
+		// String ret = "{ \"id\": \"" + id + "\"}";
+		return "{ \"result\": \"done\"}";
+		// return ret;
+
 	}
 
 	@Override
 	public String createSessionCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
-		return null;
+		String UE = null;
+		String classe = null;
+		String creneau = null;
+		JSONObject obj = new JSONObject(JSONEntry);
+		try {
+
+			classe = obj.getString("classe");
+			creneau = obj.getString("creneau");
+
+			Classe objClasse = Classe.getById(classe);
+			Creneau cr = Creneau.getById(creneau);
+
+			cr.setClasse(objClasse);
+			cr.update();
+
+		} catch (JSONException e) {
+			System.out.println("Unexpected json file, should be: UE,classe,creneau");
+
+		}
+		// String id = UUID.randomUUID().toString();
+
+		// String ret = "{ \"id\": \"" + id + "\"}";
+		return "{ \"result\": \"done\"}";
+		// return ret;
 	}
 
 	@Override
@@ -204,13 +260,19 @@ public class SessionImplementation implements SessionInterface {
 		try {
 
 			UUID = obj.getString("UUID");
-		
-			
-		}catch(JSONException e) {
+
+		} catch (JSONException e) {
 			System.out.println("Unexpected json file, should be: UUID");
-			
+
 		}
-		return "{ \"result\": \"done\"}";
+		try {
+			UniteEnseignement.getById(UUID).delete();
+			return "{ \"result\": \"done\" ,  \"type\": \"EU\" , \"UUID\": \"" + UUID + "\"  }";
+
+		} catch (Exception e) {
+			return "{ \"result\": \"error\" ,  \"type\": \"EU inexistant\"   }";
+
+		}
 	}
 
 	@Override
@@ -221,30 +283,50 @@ public class SessionImplementation implements SessionInterface {
 		try {
 
 			UUID = obj.getString("UUID");
-		
-			
-		}catch(JSONException e) {
+
+		} catch (JSONException e) {
 			System.out.println("Unexpected json file, should be: UUID");
-			
+
 		}
-		return "{ \"result\": \"done\"}";
+		try {
+			Creneau.getById(UUID).delete();
+			return "{ \"result\": \"done\" ,  \"type\": \"creneau\" , \"UUID\": \"" + UUID + "\"  }";
+		} catch (Exception e) {
+			return "{ \"result\": \"error\" ,  \"type\": \"creneau inexistant\"   }";
+
+		}
 	}
 
 	@Override
 	public String deleteSession(String JSONEntry) {
 		// TODO Auto-generated method stub
-		String UUID = null;
+		String UE = null;
+		String classe = null;
+		String creneau = null;
 		JSONObject obj = new JSONObject(JSONEntry);
 		try {
 
-			UUID = obj.getString("UUID");
-		
-			
-		}catch(JSONException e) {
-			System.out.println("Unexpected json file, should be: UUID");
-			
+			UE = obj.getString("UE");
+			classe = obj.getString("classe");
+			creneau = obj.getString("creneau");
+
+			UniteEnseignement ue = UniteEnseignement.getById(UE);
+			Classe objClasse = Classe.getById(classe);
+			Creneau cr = Creneau.getById(creneau);
+
+			cr.setUniteEnseignement(null);
+			cr.setClasse(null);
+			cr.update();
+
+		} catch (JSONException e) {
+			System.out.println("Unexpected json file, should be: UE,classe,creneau");
+
 		}
+		// String id = UUID.randomUUID().toString();
+
+		// String ret = "{ \"id\": \"" + id + "\"}";
 		return "{ \"result\": \"done\"}";
+		// return ret;
 	}
 
 	@Override
@@ -255,16 +337,141 @@ public class SessionImplementation implements SessionInterface {
 		try {
 
 			UUID = obj.getString("UUID");
-		
-			
-		}catch(JSONException e) {
+
+		} catch (JSONException e) {
 			System.out.println("Unexpected json file, should be: UUID");
-			
+
 		}
-		return "{ \"result\": \"done\"}";
+		try {
+			Classe.getById(UUID).delete();
+			return "{ \"result\": \"done\" ,  \"type\": \"classe\" , \"UUID\": \"" + UUID + "\"  }";
+		} catch (Exception e) {
+			return "{ \"result\": \"error\" ,  \"type\": \"classe inexistante\"   }";
+
+		}
 	}
 
+	@Override
+	public String getClasse(String JSONEntry) {
+		// TODO This should return JSON
+		JSONObject obj = new JSONObject(JSONEntry);
+		Classe x = Classe.getById(obj.getString("id"));
+		if (x != null)
+		{	
+			int promo = x.getPromotion();
+			String fil = x.getFiliere();
+			obj.put("promotion", String.valueOf(promo));
+			obj.put("filiere", fil);
+			return obj.toString() ;
+		}
+		else
+			return "erreur"; 
+		
+	}
+
+	@Override
+	public String getSession(String JSONEntry) {
+		// TODO This should return JSON
+		JSONObject obj = new JSONObject(JSONEntry);
+		//TODO we need to find a way to show sessions (not yet implemented)
+		return " " ;
+	}
+
+	@Override
+	public String getCreneau(String JSONEntry) {
+		// TODO This should return JSON
+		JSONObject obj = new JSONObject(JSONEntry);
+		Creneau x = Creneau.getById(obj.getString("id"));
+		if (x != null)
+		{
+			LocalTime deb = x.getDebut();
+			LocalTime fi = x.getFin();
+			LocalDate jo = x.getJour();
+			obj.put("debut", deb.toString());
+			obj.put("fin",fi.toString());
+			obj.put("jour", jo.toString());
+			return obj.toString() ;
+		}
+		else
+			return "erreur"; 
+			
+	}
+
+	@Override
+	public String getUE(String JSONEntry) {
+		// TODO This should return JSON
+		JSONObject obj = new JSONObject(JSONEntry);
+		UniteEnseignement x = UniteEnseignement.getById(obj.getString("id"));
+		if (x != null)
+		{
+			obj.put("code", x.getCode());
+			obj.put("intitule", x.getIntitule());
+			obj.put("cours", String.valueOf(x.getCours()));
+			obj.put("td", String.valueOf(x.getTd()));
+			obj.put("tp", String.valueOf(x.getTp()));
+			obj.put("valeur", String.valueOf(x.getValeur()));
+			return obj.toString() ;
+		}
+		else
+			return "erreur"; 
+		
+		
+	}
+
+	@Override
+	public String listClasse() {
+		// TODO Auto-generated method stub
+		List <Classe>  x = Classe.getAll();
+		String resp = "";
+		for (int i= 0 ; i < x.size();i++)
+		{
+			resp = resp + x.get(i).toString();
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("response", resp);
+		
+		return obj.toString();
+	}
+
+	@Override
+	public String listSession() {
+		// TODO Auto-generated method stub
+		return null;
+		// TODO list all Sessions
+	}
+
+	@Override
+	public String listCreneau() {
+		// TODO Auto-generated method stub
+		List <Creneau>  x = Creneau.getAll();
+		String resp = "";
+		for (int i= 0 ; i < x.size();i++)
+		{
+			resp = resp + x.get(i).toString();
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("response", resp);
+		
+		return obj.toString();
+	}
+
+	@Override
+	public String listEU() {
+		// TODO Auto-generated method stub
+		List <UniteEnseignement>  x = UniteEnseignement.getAll();
+		String resp = "";
+		for (int i= 0 ; i < x.size();i++)
+		{
+			resp = resp + x.get(i).toString();
+		}
+		JSONObject obj = new JSONObject();
+		obj.put("response", resp);
+		
+		return obj.toString();
+	}
 	
+	//TODO methods that returns all of everything.
+
 	
-	
+
 };

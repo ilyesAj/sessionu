@@ -7,6 +7,7 @@ package Session;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /************************************************************/
@@ -47,21 +48,21 @@ public class Classe extends SqlUtils {
 
 	public void save() {
 		this.connect();
-		this.requestUpdate(String.format("INSERT INTO CLASSE VALUES('?',?,'?')", this.id,
+		this.requestUpdate(String.format("INSERT INTO CLASSE VALUES('%s',%s,'%s')", this.id,
 				String.valueOf(this.promotion), this.filiere));
 		this.disconnect();
 	}
 
 	public void update() {
 		this.connect();
-		this.requestUpdate(String.format("UPDATE CLASSE SET promotion=?,filiere='?' WHERE id='?'",
+		this.requestUpdate(String.format("UPDATE CLASSE SET promotion=%s,filiere='%s' WHERE id='%s'",
 				String.valueOf(this.promotion), this.filiere, this.id));
 		this.disconnect();
 	}
 
 	public void delete() {
 		this.connect();
-		this.requestUpdate(String.format("DELETE FROM CLASSE WHERE id='?'", this.id));
+		this.requestUpdate(String.format("DELETE FROM CLASSE WHERE id='%s'", this.id));
 		this.disconnect();
 
 	}
@@ -69,17 +70,24 @@ public class Classe extends SqlUtils {
 	public static Classe getById(String id) {
 		SqlUtils sql = new SqlUtils();
 		sql.connect();
-		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CLASSE WHERE id='?'", id));
-		sql.disconnect();
+		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CLASSE WHERE id='%s'", id));
+		
 
 		try {
-			Classe classe = new Classe(set.getString("id"), set.getInt("promotion"), set.getString("filitere"));
+			Classe classe = new Classe(set.getString("id"), set.getInt("promotion"), set.getString("filiere"));
+			sql.disconnect();
 			return classe;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			sql.disconnect();
 			return null;
 		}
+		
+	}
 
+	@Override
+	public String toString() {
+		return "" + id + " ; " + promotion + " ; " + filiere + " \n";
 	}
 
 	public static List<Classe> getAll() {
