@@ -1,6 +1,6 @@
 Groupe Session
-# architecture
-## class diagram
+# Architecture
+## Class diagram
 ![class-Diagram.PNG](./_resources/class-Diagram.PNG)
 ## Functional Requirements 
 | ID         | Satisfied | Unsatisfied |
@@ -16,7 +16,8 @@ Groupe Session
 | Req-ses-09 |           |      X      |
 | Req-ses-10 |           |      X      |
 # Install
-## Requirements
+This section is for Linux Users
+## Technical requirements
 - access to internet 
 - have sudo privileges
 - have eclipse already installed
@@ -42,7 +43,7 @@ sudo update-alternatives --config java
 Choose the number associated with the **java-8-openjdk** version to use it as the default, or press ENTER to leave the current settings in place.
 
 # Using release 
-
+This section is for all users (Mac Os , Linux , Windows)
 ## Importing project into eclipse
 ### Getting and extracting archive
 ````sh
@@ -89,6 +90,8 @@ sudo chmod +x executable.jar
 java -jar executable.jar
 ````
 # Usage 
+This section is for all users (Mac Os , Linux , Windows)
+
 default window of the IHM : 
 ![47f91db53876ba6b3a5818336084d707.png](./_resources/c87026f17f0a4a8b8bf47174419dbaa4.png)
 
