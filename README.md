@@ -67,7 +67,7 @@ Choose the number associated with the **java-8-openjdk** version to use it as th
 ### Getting and extracting archive
 ````sh
 cd ~
-wget https://github.com/ilyesAj/sessionu/releases/download/0.1/eclipse_import.zip
+https://github.com/ilyesAj/sessionu/releases/download/0.3.1/eclipse_import.zip
 ````
 ### Importing project into workspace via UI 
 This section is for all users (Mac Os , Linux , Windows)
@@ -106,7 +106,7 @@ right click on src/app/controller.java -> run as -> java application . The expec
 ### Getting and executing binary from command-line
 ````sh
 cd ~
-wget https://github.com/ilyesAj/sessionu/releases/download/0.1/executable.jar
+wget https://github.com/ilyesAj/sessionu/releases/download/0.3.1/executable.jar
 sudo chmod +x executable.jar
 java -jar executable.jar
 ````
