@@ -15,6 +15,13 @@ Groupe Session
 | Req-ses-08 |     X     |             |
 | Req-ses-09 |           |      X      |
 | Req-ses-10 |           |      X      |
+## Packages 
+- App: App controller
+- IHM: User interafce
+- Session: implemented methods
+- Test: unitary Tests
+## Input/output
+Input/output of every method is a string of a JSON object .
 # Install
 This section is for Linux Users
 ## Technical requirements
