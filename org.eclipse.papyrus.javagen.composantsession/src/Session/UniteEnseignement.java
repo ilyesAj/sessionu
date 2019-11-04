@@ -186,14 +186,14 @@ public class UniteEnseignement extends SqlUtils {
 			sql.disconnect();
 			return null;
 		}
-
+		
 	}
 
 	public static List<UniteEnseignement> getAll() {
 		SqlUtils sql = new SqlUtils();
 		sql.connect();
 		ResultSet set = sql.requestSelect(String.format("SELECT * FROM UniteEnseignement "));
-		sql.disconnect();
+	
 		List<UniteEnseignement> result = new ArrayList<UniteEnseignement>();
 
 		try {
@@ -205,8 +205,10 @@ public class UniteEnseignement extends SqlUtils {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			sql.disconnect();
 			return null;
 		}
+		sql.disconnect();
 		return result;
 	}
 

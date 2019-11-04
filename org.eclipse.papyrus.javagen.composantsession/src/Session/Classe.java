@@ -94,19 +94,22 @@ public class Classe extends SqlUtils {
 		SqlUtils sql = new SqlUtils();
 		sql.connect();
 		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CLASSE "));
-		sql.disconnect();
+	
 		List<Classe> result = new ArrayList<Classe>();
 
 		try {
 			while (set.next()) {
-				Classe classe = new Classe(set.getString("id"), set.getInt("promotion"), set.getString("filitere"));
+				Classe classe = new Classe(set.getString("id"), set.getInt("promotion"), set.getString("filiere"));
 				result.add(classe);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			sql.disconnect();
 			return null;
 		}
+		sql.disconnect();
 		return result;
+		
 	}
 
 	public String getId() {

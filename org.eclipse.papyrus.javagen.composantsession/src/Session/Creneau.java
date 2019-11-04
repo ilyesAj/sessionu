@@ -147,7 +147,7 @@ public class Creneau extends SqlUtils {
 		SqlUtils sql = new SqlUtils();
 		sql.connect();
 		ResultSet set = sql.requestSelect(String.format("SELECT * FROM CRENEAU"));
-		sql.disconnect();
+		
 		List<Creneau> result = new ArrayList<Creneau>();
 
 		try {
@@ -158,8 +158,10 @@ public class Creneau extends SqlUtils {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			sql.disconnect();
 			return null;
 		}
+		sql.disconnect();
 		return result;
 	}
 
