@@ -130,6 +130,8 @@ We can also
 # Anomalies 
 ## Non-implemented fonctionality
             ▪ Lister une session
+            ▪ Créer des sessions sur un ensemble de créneaux
 
-## Non-operational fonctionality:
-            ▪ Lister une classe / créneau / UE
+            
+
+
