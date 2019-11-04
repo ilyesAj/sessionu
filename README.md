@@ -5,8 +5,8 @@ Groupe Session
 ## Functional Requirements 
 | ID         | Satisfied | Unsatisfied |
 |------------|-----------|-------------|
-| Req-ses-01 |     X     |             |L'utilisateur peut créer une Unité d'Enseignement.
-| Req-ses-02 |     X     |             |L'utilisateur peut supprimer une Unité d'Enseignement.
+| Req-ses-01 |     X     |             | L'utilisateur peut créer une Unité d'Enseignement.
+| Req-ses-02 |     X     |             | L'utilisateur peut supprimer une Unité d'Enseignement.
 | Req-ses-03 |     X     |             |L'utilisateur peut créer un créneau.
 | Req-ses-04 |     X     |             |L'utilisateur peut supprimer un créneau (temporel).
 | Req-ses-05 |     X     |             |L'utilisateur peut créer une classe (promo).
