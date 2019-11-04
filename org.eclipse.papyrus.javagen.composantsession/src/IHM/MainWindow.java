@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.UUID;
 import java.awt.event.ActionEvent;
 import Session.SessionImplementation;
 import javax.swing.JTextArea;
@@ -324,7 +325,9 @@ public class MainWindow {
 				String TD = td.getText();
 				String TP = tp.getText();
 				String val = valeur.getText();
+				String id = UUID.randomUUID().toString();
 				JSONObject obj = new JSONObject();
+				obj.put("id", id);
 				obj.put("code", co);
 				obj.put("intitule", inti);
 				obj.put("cours", cou);
@@ -343,10 +346,12 @@ public class MainWindow {
 		JButton cCreneau = new JButton("Creer creneau");
 		cCreneau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String id = UUID.randomUUID().toString();
 				String deb = debut.getText();
 				String fi = fin.getText();
 				String jo = jour.getText();
 				JSONObject obj = new JSONObject();
+				obj.put("id", id);
 				obj.put("debut", deb);
 				obj.put("fin", fi);
 				obj.put("jour", jo);
@@ -365,7 +370,9 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent e) {
 				String promo = promotion.getText();
 				String fil = filiere.getText();
+				String id = UUID.randomUUID().toString();
 				JSONObject obj = new JSONObject();
+				obj.put("id", id);
 				obj.put("promotion", promo);
 				obj.put("filiere", fil);
 				console.setText("");

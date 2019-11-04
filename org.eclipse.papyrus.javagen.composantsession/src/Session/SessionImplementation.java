@@ -87,9 +87,10 @@ public class SessionImplementation implements SessionInterface {
 		float valeur = 0;
 		float td = 0;
 		String code = null;
+		String id = null;
 		JSONObject obj = new JSONObject(JSONEntry);
 		try {
-
+			id = obj.getString("id");
 			code = obj.getString("code");
 			intitule = obj.getString("intitule");
 			cours = Float.parseFloat(obj.getString("cours"));
@@ -101,7 +102,6 @@ public class SessionImplementation implements SessionInterface {
 			System.out.println("Unexpected json file, should be: code,intitule,cours,td,tp,valeur");
 
 		}
-		String id = UUID.randomUUID().toString();
 		UniteEnseignement UE = new UniteEnseignement(id, code, intitule, cours, td, tp, valeur);
 
 		UE.save();
@@ -115,13 +115,13 @@ public class SessionImplementation implements SessionInterface {
 	public String createCreneau(String JSONEntry) {
 		// TODO Auto-generated method stub
 		// init
-		String id = UUID.randomUUID().toString();
+		String id = null;
 		LocalTime debut = LocalTime.now();
 		LocalTime fin = LocalTime.now();
 		LocalDate jour = LocalDate.now();
 		// parse
 		JSONObject obj = new JSONObject(JSONEntry);
-
+		id = obj.getString("id");
 		debut = LocalTime.parse(obj.getString("debut"));
 		fin = LocalTime.parse(obj.getString("fin"));
 
@@ -140,10 +140,11 @@ public class SessionImplementation implements SessionInterface {
 
 		int promotion = 0;
 		String filiere = null;
-
+		String id = null;
 		JSONObject obj = new JSONObject(JSONEntry);
 
 		try {
+			id = obj.getString("id");
 			promotion = Integer.parseInt(obj.getString("promotion"));
 			filiere = obj.getString("filiere");
 		} catch (JSONException e) {
@@ -151,7 +152,7 @@ public class SessionImplementation implements SessionInterface {
 			System.out.println("Unexpected json file, should be: promotion,filiere");
 
 		}
-		String id = UUID.randomUUID().toString();
+		
 		Classe classe = new Classe(id, promotion, filiere);
 
 		String ret = "{ \"id\": \"" + id + "\"}";
