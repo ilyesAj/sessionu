@@ -131,7 +131,7 @@ We can also
 ## Non-implemented fonctionality
             ▪ Lister une session
             ▪ Créer des sessions sur un ensemble de créneaux
-
-            
+# delete Project
+Right-click on the project -> delete 
 
 
