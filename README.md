@@ -16,16 +16,16 @@ Groupe Session
 | Req-ses-09 |           |      X      |
 | Req-ses-10 |           |      X      |
 
-L'utilisateur peut créer une Unité d'Enseignement.
-L'utilisateur peut supprimer une Unité d'Enseignement.
-L'utilisateur peut créer un créneau.
-L'utilisateur peut supprimer un créneau (temporel).
-L'utilisateur peut créer une classe (promo).
-L'utilisateur peut supprimer une classe (promo).
-L'utilisateur peut créer une session (UE – classe - créneau).
-L'utilisateur peut supprimer une session (UE – classe – créneau).
-L'utilisateur peut changer une session de créneau temporel.
-L'utilisateur peut créer des sessions sur un ensemble de créneaux.
+- L'utilisateur peut créer une Unité d'Enseignement.
+- L'utilisateur peut supprimer une Unité d'Enseignement.
+- L'utilisateur peut créer un créneau.
+- L'utilisateur peut supprimer un créneau (temporel).
+- L'utilisateur peut créer une classe (promo).
+- L'utilisateur peut supprimer une classe (promo).
+- L'utilisateur peut créer une session (UE – classe - créneau).
+- L'utilisateur peut supprimer une session (UE – classe – créneau).
+- L'utilisateur peut changer une session de créneau temporel.
+- L'utilisateur peut créer des sessions sur un ensemble de créneaux.
 
 
 ## Packages 
